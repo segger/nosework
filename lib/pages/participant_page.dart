@@ -14,6 +14,18 @@ class ParticipantPage extends StatefulWidget {
 }
 
 class _ParticipantPageState extends State<ParticipantPage> {
+
+  void _modify(BuildContext context, Participant participant) {
+    Navigator.push(context,
+      MaterialPageRoute(
+        builder: (context) => EditParticipant(
+          participant: participant,
+          onSaved: () => setState(() {})
+        ),
+      )
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +42,7 @@ class _ParticipantPageState extends State<ParticipantPage> {
               itemBuilder: (BuildContext context, int index) {
                 return ParticipantCard(
                   participant: snapshot.data[index],
-                  onPressed: (participant) => Navigator.pushNamed(context, EditParticipant.routeName, arguments: participant),
+                  onPressed: (participant) => _modify(context, participant),
                 );
               }
             );
@@ -42,7 +54,7 @@ class _ParticipantPageState extends State<ParticipantPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, EditParticipant.routeName, arguments: Participant());
+          _modify(context, Participant());
         },
         child: Icon(Icons.add),
       ),

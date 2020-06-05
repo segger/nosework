@@ -34,6 +34,14 @@ class DBRepository {
     });
   }
 
+  Future<int> saveParticipant(Participant participant) async {
+    if (participant.id == null) {
+      return await provider.insert(DBConstants.PARTICIPANT_TABLE, participant.toDbMap());
+    } else {
+      return await provider.update(DBConstants.PARTICIPANT_TABLE, participant.toDbMap());
+    }
+  }
+
   Future<List<Protocol>> getProtocols(int momentId) async {
     List<Map<String, dynamic>> dbList = await provider.getAllWhere(DBConstants.PROTOCOL_TABLE, {"momentId":momentId});
     return dbList.isEmpty ? [] : List.generate(dbList.length, (i) {

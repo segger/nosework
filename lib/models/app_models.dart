@@ -74,6 +74,14 @@ class Participant {
       dog: dbMap['dog'],
     );
   }
+
+  Map<String, dynamic> toDbMap() {
+    return {
+      "id": id,
+      "name": name,
+      "dog": dog,
+    };
+  }
 }
 
 class Protocol {

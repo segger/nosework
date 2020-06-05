@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:nosework/models/app_models.dart';
+import 'package:nosework/providers/db_repository.dart';
 
 class EditParticipant extends StatefulWidget {
-  static const routeName = '/participantedit';
-
-  EditParticipant();
+  final Function onSaved;
+  final Participant participant;
+  EditParticipant({ this.participant, this.onSaved });
 
   @override
   _EditParticipantState createState() => _EditParticipantState();
@@ -13,15 +14,25 @@ class EditParticipant extends StatefulWidget {
 class _EditParticipantState extends State<EditParticipant> {
   final _formKey = GlobalKey<FormState>();
 
+  Participant participant;
+
+  @override
+  void initState() {
+    participant = widget.participant;
+    super.initState();
+  }
+
   void _save() {
     _formKey.currentState.save();
+    DBRepository().saveParticipant(participant);
+    if (widget.onSaved != null) {
+      widget.onSaved();
+    }
     Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context) {
-    final Participant participant = ModalRoute.of(context).settings.arguments;
-    
     return Scaffold(
       appBar: AppBar(
         title: Text('Deltagare'),
@@ -47,11 +58,19 @@ class _EditParticipantState extends State<EditParticipant> {
             children: <Widget>[
               TextFormField(
                 initialValue: participant.name,
+                validator: (value) {
+                  if (value.isEmpty) return 'Ange förare';
+                  return null;
+                },
                 decoration: InputDecoration(labelText: 'Förare'),
                 onSaved: (value) => participant.name = value,
               ),
               TextFormField(
                 initialValue: participant.dog,
+                validator: (value) {
+                  if (value.isEmpty) return 'Ange hund';
+                  return null;
+                },
                 decoration: InputDecoration(labelText: 'Hund'),
                 onSaved: (value) => participant.dog = value,
               ),

@@ -116,4 +116,17 @@ class DBProvider {
     whereStr = whereStr.substring(0, whereStr.length - 3); // Remove last AND
     return db.query(table, where: whereStr, whereArgs: whereArgs);
   }
+
+  Future<int> insert(String table, Map<String, dynamic> object) async {
+    final db = await database;
+    object.removeWhere((key, value) => key == "id");
+    return await db.insert(table, object);
+  }
+
+  Future<int> update(String table, Map<String, dynamic> object) async {
+    final db = await database;
+    String whereStr = 'id = ?';
+    List<dynamic> whereArgs = [object['id']];
+    return await db.update(table, object, where: whereStr, whereArgs: whereArgs);
+  }
 }
