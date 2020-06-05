@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:nosework/models/app_models.dart';
+import 'package:nosework/pages/protocol_page.dart';
 import 'package:nosework/services/result_service.dart';
+import 'package:nosework/widgets/moment_app_bar.dart';
 import 'package:nosework/widgets/moment_result_table.dart';
 import 'package:nosework/widgets/nw_drawer.dart';
 
@@ -19,28 +21,7 @@ class _MomentResultPageState extends State<MomentResultPage> {
     
     return Scaffold(
       appBar: AppBar(
-        title: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text("${moment.name}", style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),),
-                    Text("${moment.printType()}"),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Text("${moment.printMaxTime()}")
-              ),
-            ],
-          ),
-        ),
+        title: MomentAppBarTitle(moment: moment),
       ),
       drawer: NWDrawer(),
       body: FutureBuilder<List<Result>>(
@@ -53,6 +34,12 @@ class _MomentResultPageState extends State<MomentResultPage> {
           }
           return CircularProgressIndicator();
         }
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, ProtocolPage.routeName, arguments: moment);
+        },
+        child: Icon(Icons.add),
       ),
     );
   }
