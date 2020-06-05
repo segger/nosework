@@ -29,6 +29,10 @@ class DBProvider {
         "id INTEGER PRIMARY KEY AUTOINCREMENT,"
         "name TEXT)"
     );
+
+    await db.execute(
+      "INSERT INTO ${DBConstants.TOURNAMENT_TABLE}(name) VALUES ('Sommarsniffen 2020')"
+    );
   }
 
   Future<List<Map<String, dynamic>>> getAll(String table) async {
