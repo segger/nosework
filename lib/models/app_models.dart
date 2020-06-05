@@ -7,7 +7,7 @@ class Tournament {
   static Tournament of(Map<String, dynamic> dbMap) {
     return Tournament(
       id: dbMap['id'],
-      name: dbMap['name']
+      name: dbMap['name'],
     );
   }
 }
@@ -21,7 +21,7 @@ class Contest {
   static Contest of(Map<String, dynamic> dbMap) {
     return Contest(
       id: dbMap['id'],
-      name: dbMap['name']
+      name: dbMap['name'],
     );
   }
 }
@@ -53,7 +53,21 @@ class Moment {
     return Moment(
       name: dbMap['name'],
       type: dbMap['type'],
-      maxTime: dbMap['maxTime']
+      maxTime: dbMap['maxTime'],
+    );
+  }
+}
+
+class Participant {
+  String name;
+  String dog;
+
+  Participant({ this.name, this.dog });
+
+  static Participant of(Map<String, dynamic> dbMap) {
+    return Participant(
+      name: dbMap['name'],
+      dog: dbMap['dog'],
     );
   }
 }

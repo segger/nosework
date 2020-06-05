@@ -26,4 +26,11 @@ class DBRepository {
       return Moment.of(dbList[i]);
     });
   }
+
+  Future<List<Participant>> getParticipants() async {
+    List<Map<String, dynamic>> dbList = await provider.getAll(DBConstants.PARTICIPANT_TABLE);
+    return dbList.isEmpty ? [] : List.generate(dbList.length, (i) {
+      return Participant.of(dbList[i]);
+    });
+  }
 }

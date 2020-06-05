@@ -47,6 +47,13 @@ class DBProvider {
     );
 
     await db.execute(
+      "CREATE TABLE ${DBConstants.PARTICIPANT_TABLE} ("
+      "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+      "name TEXT,"
+      "dog TEXT)"
+    );
+
+    await db.execute(
       "INSERT INTO ${DBConstants.TOURNAMENT_TABLE}(name) VALUES ('Sommarsniffen 2020')"
     );
 
@@ -60,6 +67,14 @@ class DBProvider {
 
     await db.execute(
       "INSERT INTO ${DBConstants.MOMENT_TABLE}(name, type, maxTime, contestId) VALUES ('Moment2', 'OUTDOOR', 120000, 1)"
+    );
+
+    await db.execute(
+      "INSERT INTO ${DBConstants.PARTICIPANT_TABLE}(name, dog) VALUES ('Jojo','Kira')"
+    );
+
+    await db.execute(
+      "INSERT INTO ${DBConstants.PARTICIPANT_TABLE}(name, dog) VALUES ('Jojo','Niko')"
     );
   }
 
