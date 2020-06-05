@@ -27,11 +27,12 @@ class Contest {
 }
 
 class Moment {
+  int id;
   String name;
   String type;
   int maxTime;
 
-  Moment({ this.name, this.type, this.maxTime });
+  Moment({ this.id, this.name, this.type, this.maxTime });
 
   String printType() {
     switch(type) {
@@ -51,6 +52,7 @@ class Moment {
 
   static Moment of(Map<String, dynamic> dbMap) {
     return Moment(
+      id: dbMap['id'],
       name: dbMap['name'],
       type: dbMap['type'],
       maxTime: dbMap['maxTime'],
@@ -59,15 +61,37 @@ class Moment {
 }
 
 class Participant {
+  int id;
   String name;
   String dog;
 
-  Participant({ this.name, this.dog });
+  Participant({ this.id, this.name, this.dog });
 
   static Participant of(Map<String, dynamic> dbMap) {
     return Participant(
+      id: dbMap['id'],
       name: dbMap['name'],
       dog: dbMap['dog'],
+    );
+  }
+}
+
+class Protocol {
+  int participantId;
+  bool sse;
+  int points;
+  int errors;
+  int time;
+
+  Protocol({ this.participantId, this.sse, this.points, this.errors, this.time });
+
+  static Protocol of(Map<String, dynamic> dbMap) {
+    return Protocol(
+      participantId: dbMap['participantId'],
+      sse: dbMap['sse'] == 1,
+      points: dbMap['points'],
+      errors: dbMap['errors'],
+      time: dbMap['time'],
     );
   }
 }

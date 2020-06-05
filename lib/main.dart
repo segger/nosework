@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nosework/pages/moment_result_page.dart';
 import 'package:nosework/pages/participant_page.dart';
 
 import 'package:nosework/pages/tournament_page.dart';
@@ -20,6 +21,7 @@ class NWApp extends StatelessWidget {
         ContestPage.routeName: (context) => ContestPage(),
         MomentPage.routeName: (context) => MomentPage(),
         ParticipantPage.routeName: (context) => ParticipantPage(),
+        MomentResultPage.routeName: (context) => MomentResultPage(),
       },
       theme: ThemeData(
         primarySwatch: Colors.purple,

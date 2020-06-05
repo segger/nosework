@@ -3,4 +3,5 @@ class DBConstants {
   static const CONTEST_TABLE = "contests";
   static const MOMENT_TABLE = "moments";
   static const PARTICIPANT_TABLE = "participants";
+  static const PROTOCOL_TABLE = "protocols";
 }

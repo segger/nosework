@@ -54,6 +54,18 @@ class DBProvider {
     );
 
     await db.execute(
+      "CREATE TABLE ${DBConstants.PROTOCOL_TABLE} ("
+      "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+      "momentId INTEGER,"
+      "participantId INTEGER,"
+      "sse BOOLEAN,"
+      "points INTEGER,"
+      "errors INTEGER,"
+      "time INTEGER,"
+      "comment TEXT)"
+    );
+
+    await db.execute(
       "INSERT INTO ${DBConstants.TOURNAMENT_TABLE}(name) VALUES ('Sommarsniffen 2020')"
     );
 
@@ -75,6 +87,11 @@ class DBProvider {
 
     await db.execute(
       "INSERT INTO ${DBConstants.PARTICIPANT_TABLE}(name, dog) VALUES ('Jojo','Niko')"
+    );
+
+    await db.execute(
+      "INSERT INTO ${DBConstants.PROTOCOL_TABLE}(momentId, participantId, sse, points, errors, time, comment) "
+      "VALUES (1, 1, 0, 25, 0, 75300, 'Hejja')"
     );
   }
 

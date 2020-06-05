@@ -33,4 +33,11 @@ class DBRepository {
       return Participant.of(dbList[i]);
     });
   }
+
+  Future<List<Protocol>> getProtocols(int momentId) async {
+    List<Map<String, dynamic>> dbList = await provider.getAllWhere(DBConstants.PROTOCOL_TABLE, {"momentId":momentId});
+    return dbList.isEmpty ? [] : List.generate(dbList.length, (i) {
+      return Protocol.of(dbList[i]);
+    });
+  }
 }
