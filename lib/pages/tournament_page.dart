@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nosework/models/app_models.dart';
 import 'package:nosework/providers/db_repository.dart';
+import 'package:nosework/widgets/nw_drawer.dart';
 import 'package:nosework/widgets/tournament_card.dart';
 
 class TournamentPage extends StatefulWidget {
@@ -19,6 +20,7 @@ class _TournamentPageState extends State<TournamentPage> {
       appBar: AppBar(
         title: Text('Tuneringar'),
       ),
+      drawer: NWDrawer(),
       body: FutureBuilder<List<Tournament>>(
         future: DBRepository().getTournamentList(),
         builder: (context, snapshot) {
