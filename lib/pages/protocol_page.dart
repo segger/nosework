@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:nosework/models/app_models.dart';
-import 'package:nosework/providers/db_repository.dart';
 import 'package:nosework/widgets/moment_app_bar.dart';
-import 'package:nosework/widgets/nw_drawer.dart';
-import 'package:nosework/widgets/participant_card.dart';
 
 class ProtocolPage extends StatefulWidget {
   static const routeName = '/protocol';

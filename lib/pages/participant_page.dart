@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:nosework/models/app_models.dart';
+import 'package:nosework/pages/participant_edit.dart';
 import 'package:nosework/providers/db_repository.dart';
 import 'package:nosework/widgets/nw_drawer.dart';
 import 'package:nosework/widgets/participant_card.dart';
@@ -28,7 +29,8 @@ class _ParticipantPageState extends State<ParticipantPage> {
               itemCount: snapshot.data.length,
               itemBuilder: (BuildContext context, int index) {
                 return ParticipantCard(
-                  participant: snapshot.data[index]
+                  participant: snapshot.data[index],
+                  onPressed: (participant) => Navigator.pushNamed(context, EditParticipant.routeName, arguments: participant),
                 );
               }
             );
@@ -37,6 +39,12 @@ class _ParticipantPageState extends State<ParticipantPage> {
           }
           return CircularProgressIndicator();
         }
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, EditParticipant.routeName, arguments: Participant());
+        },
+        child: Icon(Icons.add),
       ),
     );
   }

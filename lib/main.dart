@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nosework/pages/moment_result_page.dart';
+import 'package:nosework/pages/participant_edit.dart';
 import 'package:nosework/pages/participant_page.dart';
 import 'package:nosework/pages/protocol_page.dart';
 
@@ -24,6 +25,7 @@ class NWApp extends StatelessWidget {
         ParticipantPage.routeName: (context) => ParticipantPage(),
         MomentResultPage.routeName: (context) => MomentResultPage(),
         ProtocolPage.routeName: (context) => ProtocolPage(),
+        EditParticipant.routeName: (context) => EditParticipant(),
       },
       theme: ThemeData(
         primarySwatch: Colors.purple,
