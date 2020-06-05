@@ -13,13 +13,47 @@ class Tournament {
 }
 
 class Contest {
+  int id;
   String name;
 
-  Contest({ this.name });
+  Contest({ this.id, this.name });
 
   static Contest of(Map<String, dynamic> dbMap) {
     return Contest(
+      id: dbMap['id'],
       name: dbMap['name']
+    );
+  }
+}
+
+class Moment {
+  String name;
+  String type;
+  int maxTime;
+
+  Moment({ this.name, this.type, this.maxTime });
+
+  String printType() {
+    switch(type) {
+      case 'INDOOR': return 'Inomhussök';
+      case 'OUTDOOR': return 'Utomhussök';
+      case 'VEHICLE': return 'Fordonssök';
+      case 'CONTAINER': return 'Behållarsök';
+    }
+    return '';
+  }
+
+  String printMaxTime() {
+    Duration duration = Duration(milliseconds: maxTime);
+    return [duration.inMinutes, duration.inSeconds]
+          .map((dur) => dur.remainder(60).toString().padLeft(2, '0')).join(':');
+  }
+
+  static Moment of(Map<String, dynamic> dbMap) {
+    return Moment(
+      name: dbMap['name'],
+      type: dbMap['type'],
+      maxTime: dbMap['maxTime']
     );
   }
 }

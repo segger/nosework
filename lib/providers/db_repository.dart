@@ -19,4 +19,11 @@ class DBRepository {
       return Contest.of(dbList[i]);
     });
   }
+
+  Future<List<Moment>> getMomentList(int contestId) async {
+    List<Map<String, dynamic>> dbList = await provider.getAllWhere(DBConstants.MOMENT_TABLE, {"contestId": contestId});
+    return dbList.isEmpty ? [] : List.generate(dbList.length, (i) {
+      return Moment.of(dbList[i]);
+    });
+  }
 }

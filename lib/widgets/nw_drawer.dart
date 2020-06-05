@@ -19,7 +19,7 @@ class NWDrawer extends StatelessWidget{
                 Text('@segger'),
               ],
             ),
-            decoration: BoxDecoration(color: Colors.purpleAccent),
+            decoration: BoxDecoration(color: Colors.purple),
           ),
           ListTile(
             leading: Icon(Icons.home),

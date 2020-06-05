@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nosework/models/app_models.dart';
+import 'package:nosework/pages/moment_page.dart';
 import 'package:nosework/providers/db_repository.dart';
 import 'package:nosework/widgets/contest_card.dart';
 import 'package:nosework/widgets/nw_drawer.dart';
@@ -35,6 +36,7 @@ class _ContestPageState extends State<ContestPage> {
               itemBuilder: (BuildContext context, int index) {
                 return ContestCard(
                   contest: snapshot.data[index],
+                  onPressed: (contest) => Navigator.pushNamed(context, MomentPage.routeName, arguments: contest),
                 );
               }
             );

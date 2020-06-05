@@ -38,11 +38,28 @@ class DBProvider {
     );
 
     await db.execute(
+      "CREATE TABLE ${DBConstants.MOMENT_TABLE} ("
+      "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+      "name TEXT,"
+      "type TEXT,"
+      "maxTime INTEGER,"
+      "contestId INTEGER)"
+    );
+
+    await db.execute(
       "INSERT INTO ${DBConstants.TOURNAMENT_TABLE}(name) VALUES ('Sommarsniffen 2020')"
     );
 
     await db.execute(
       "INSERT INTO ${DBConstants.CONTEST_TABLE}(name, tournamentId) VALUES ('Gullstensön', 1)"
+    );
+
+    await db.execute(
+      "INSERT INTO ${DBConstants.MOMENT_TABLE}(name, type, maxTime, contestId) VALUES ('Moment1', 'INDOOR', 90000, 1)"
+    );
+
+    await db.execute(
+      "INSERT INTO ${DBConstants.MOMENT_TABLE}(name, type, maxTime, contestId) VALUES ('Moment2', 'OUTDOOR', 120000, 1)"
     );
   }
 
