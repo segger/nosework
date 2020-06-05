@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:nosework/models/app_models.dart';
 
-class TournamentCard extends StatelessWidget {
-  const TournamentCard({Key key, @required this.tournament, this.onPressed }) : super(key: key);
+class ContestCard extends StatelessWidget {
+  const ContestCard({Key key, @required this.contest, this.onPressed }) : super(key: key);
 
-  final Tournament tournament;
-  final Function(Tournament) onPressed;
+  final Contest contest;
+  final Function(Contest) onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class TournamentCard extends StatelessWidget {
       child: InkWell(
         onTap: () => {
           if (onPressed != null) {
-            onPressed(tournament)
+            onPressed(contest)
           }
         },
         child: Row(
@@ -22,7 +22,7 @@ class TournamentCard extends StatelessWidget {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Text("${tournament.name}", style: TextStyle(fontSize: 26.0),)
+              child: Text("${contest.name}", style: TextStyle(fontSize: 24.0),)
             ),
           ],
         ),

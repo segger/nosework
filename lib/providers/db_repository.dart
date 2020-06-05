@@ -12,4 +12,11 @@ class DBRepository {
       return Tournament.of(dbList[i]);
     });
   }
+
+  Future<List<Contest>> getContestList(int tournamentId) async {
+    List<Map<String, dynamic>> dbList = await provider.getAllWhere(DBConstants.CONTEST_TABLE, {"tournamentId": tournamentId });
+    return dbList.isEmpty ? [] : List.generate(dbList.length, (i) {
+      return Contest.of(dbList[i]);
+    });
+  }
 }

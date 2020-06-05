@@ -1,10 +1,24 @@
 class Tournament {
+  int id;
   String name;
 
-  Tournament({ this.name });
+  Tournament({ this.id, this.name });
 
   static Tournament of(Map<String, dynamic> dbMap) {
     return Tournament(
+      id: dbMap['id'],
+      name: dbMap['name']
+    );
+  }
+}
+
+class Contest {
+  String name;
+
+  Contest({ this.name });
+
+  static Contest of(Map<String, dynamic> dbMap) {
+    return Contest(
       name: dbMap['name']
     );
   }

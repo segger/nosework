@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:nosework/pages/tournament_page.dart';
+
 class NWDrawer extends StatelessWidget{
 
   @override
@@ -23,7 +25,7 @@ class NWDrawer extends StatelessWidget{
             leading: Icon(Icons.home),
             title: Text('Start'),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.pushNamed(context, TournamentPage.routeName);
             },
           ),
         ],
