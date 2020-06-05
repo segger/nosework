@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:nosework/models/app_models.dart';
 import 'package:nosework/services/result_service.dart';
-import 'package:nosework/widgets/moment_result_card.dart';
+import 'package:nosework/widgets/moment_result_table.dart';
 import 'package:nosework/widgets/nw_drawer.dart';
 
 class MomentResultPage extends StatefulWidget {
@@ -43,18 +43,11 @@ class _MomentResultPageState extends State<MomentResultPage> {
         ),
       ),
       drawer: NWDrawer(),
-      body: FutureBuilder<List<Protocol>>(
+      body: FutureBuilder<List<Result>>(
         future: ResultService().getMomentResult(moment.id),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return ListView.builder(
-              itemCount: snapshot.data.length,
-              itemBuilder: (BuildContext context, int index) {
-                return MomentResultCard(
-                  result: snapshot.data[index],
-                );
-              }
-            );
+            return MomentResultTable(results: snapshot.data);
           } else if (snapshot.hasError) {
             return Text('Nått gick fel');
           }

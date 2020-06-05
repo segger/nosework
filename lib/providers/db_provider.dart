@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:nosework/providers/db_mock_data.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -66,33 +67,36 @@ class DBProvider {
     );
 
     await db.execute(
-      "INSERT INTO ${DBConstants.TOURNAMENT_TABLE}(name) VALUES ('Sommarsniffen 2020')"
+      "INSERT INTO ${DBConstants.TOURNAMENT_TABLE}(name) VALUES ('Sommarsniffen')"
     );
 
     await db.execute(
-      "INSERT INTO ${DBConstants.CONTEST_TABLE}(name, tournamentId) VALUES ('Gullstensön', 1)"
+      "INSERT INTO ${DBConstants.CONTEST_TABLE}(name, tournamentId) VALUES ('Behållare', 1)"
     );
 
     await db.execute(
-      "INSERT INTO ${DBConstants.MOMENT_TABLE}(name, type, maxTime, contestId) VALUES ('Moment1', 'INDOOR', 90000, 1)"
+      "INSERT INTO ${DBConstants.MOMENT_TABLE}(name, type, maxTime, contestId) VALUES ('Sök1', 'CONTAINER', 90000, 1)"
     );
 
     await db.execute(
-      "INSERT INTO ${DBConstants.MOMENT_TABLE}(name, type, maxTime, contestId) VALUES ('Moment2', 'OUTDOOR', 120000, 1)"
+      "INSERT INTO ${DBConstants.MOMENT_TABLE}(name, type, maxTime, contestId) VALUES ('Sök2', 'CONTAINER', 120000, 1)"
     );
 
     await db.execute(
-      "INSERT INTO ${DBConstants.PARTICIPANT_TABLE}(name, dog) VALUES ('Jojo','Kira')"
+      "INSERT INTO ${DBConstants.MOMENT_TABLE}(name, type, maxTime, contestId) VALUES ('Sök3', 'CONTAINER', 60000, 1)"
     );
 
-    await db.execute(
-      "INSERT INTO ${DBConstants.PARTICIPANT_TABLE}(name, dog) VALUES ('Jojo','Niko')"
-    );
+    DBMockData().participants().forEach((element) async {
+      await db.execute(element);
+    });
 
-    await db.execute(
-      "INSERT INTO ${DBConstants.PROTOCOL_TABLE}(momentId, participantId, sse, points, errors, time, comment) "
-      "VALUES (1, 1, 0, 25, 0, 75300, 'Hejja')"
-    );
+    DBMockData().protocols(1).forEach((element) async {
+      await db.execute(element);
+    });
+
+    DBMockData().protocols(2).forEach((element) async {
+      await db.execute(element);
+    });
   }
 
   Future<List<Map<String, dynamic>>> getAll(String table) async {

@@ -95,3 +95,28 @@ class Protocol {
     );
   }
 }
+
+class Result {
+  String placement;
+  String participant;
+  bool sse;
+  int points;
+  int errors;
+  String time;
+  int tournamentPoints;
+
+  Result({ this.participant, this.placement, this.tournamentPoints, protocol }) :
+    sse = protocol.sse,
+    points = protocol.points,
+    errors = protocol.errors,
+    time = formatTime(protocol.time);
+
+
+  static String formatTime(int time) {
+    Duration duration = Duration(milliseconds: time);
+    String minSec = [duration.inMinutes, duration.inSeconds]
+          .map((dur) => dur.remainder(60).toString().padLeft(2, '0')).join(':');
+    String milliseconds = duration.inMilliseconds.remainder(100).toString().padLeft(2, '0');
+    return "$minSec.$milliseconds";
+  }
+}

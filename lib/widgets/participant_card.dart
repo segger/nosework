@@ -16,7 +16,7 @@ class ParticipantCard extends StatelessWidget {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Text("${participant.name} & ${participant.dog}", style: TextStyle(fontSize: 26.0),)
+              child: Text("${participant.name} & ${participant.dog}")
             ),
           ],
         ),
