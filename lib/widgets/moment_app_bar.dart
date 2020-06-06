@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:nosework/models/app_models.dart';
+import 'package:nosework/utils/utils.dart';
 
 class MomentAppBarTitle extends StatelessWidget {
   MomentAppBarTitle({Key key, this.moment});
@@ -24,7 +25,7 @@ class MomentAppBarTitle extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(4.0),
-            child: Text("${moment.printMaxTime()}")
+            child: Text("${Utils.toMinSec(moment.maxTime)}")
            ),
         ],
       ),

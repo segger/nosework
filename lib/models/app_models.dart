@@ -1,3 +1,5 @@
+import 'package:nosework/utils/utils.dart';
+
 class Tournament {
   int id;
   String name;
@@ -42,12 +44,6 @@ class Moment {
       case 'CONTAINER': return 'Behållarsök';
     }
     return '';
-  }
-
-  String printMaxTime() {
-    Duration duration = Duration(milliseconds: maxTime);
-    return [duration.inMinutes, duration.inSeconds]
-          .map((dur) => dur.remainder(60).toString().padLeft(2, '0')).join(':');
   }
 
   static Moment of(Map<String, dynamic> dbMap) {
@@ -117,14 +113,5 @@ class Result {
     sse = protocol.sse,
     points = protocol.points,
     errors = protocol.errors,
-    time = formatTime(protocol.time);
-
-
-  static String formatTime(int time) {
-    Duration duration = Duration(milliseconds: time);
-    String minSec = [duration.inMinutes, duration.inSeconds]
-          .map((dur) => dur.remainder(60).toString().padLeft(2, '0')).join(':');
-    String milliseconds = duration.inMilliseconds.remainder(100).toString().padLeft(2, '0');
-    return "$minSec.$milliseconds";
-  }
+    time = Utils.toMinSecMillis(protocol.time);
 }

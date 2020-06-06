@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nosework/models/app_models.dart';
+import 'package:nosework/utils/utils.dart';
 
 class MomentCard extends StatelessWidget {
   const MomentCard({Key key, @required this.moment, this.onPressed }) : super(key: key);
@@ -34,7 +35,7 @@ class MomentCard extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text("${moment.printMaxTime()}"),
+                child: Text("${Utils.toMinSec(moment.maxTime)}"),
               ),
             ],
           ),
