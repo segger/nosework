@@ -2,19 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:nosework/models/app_models.dart';
+import 'package:nosework/providers/db_repository.dart';
 import 'package:nosework/utils/utils.dart';
-import 'package:nosework/widgets/moment_app_bar.dart';
+import 'package:nosework/widgets/moment_app_bar_title.dart';
 import 'package:nosework/widgets/search_area_expansion.dart';
 
 class ProtocolPage extends StatefulWidget {
-  static const routeName = '/protocol';
-  ProtocolPage({Key key}) : super(key: key);
+  final Moment moment;
+  ProtocolPage({Key key, this.moment }) : super(key: key);
+
   @override
   _ProtocolPageState createState() => _ProtocolPageState();
 }
 
 class _ProtocolPageState extends State<ProtocolPage> {
   final _formKey = GlobalKey<FormState>();
+
+  Moment moment;
 
   List<DropdownMenuItem<int>> _participants = [];
   int _selectedParticipant;
@@ -27,9 +31,14 @@ class _ProtocolPageState extends State<ProtocolPage> {
   String _commentValue;
 
   @override
-  void initState() {  
-    _participants.add(DropdownMenuItem(child: Text('Jojo & Kira'), value: 1,));
-    _participants.add(DropdownMenuItem(child: Text('Jojo & Niko'), value: 2,));
+  void initState() {
+    moment = widget.moment;
+
+    DBRepository().getParticipants().then((participants) => {
+      _participants = participants.expand((p) => {
+        DropdownMenuItem(child: Text("${p.name} & ${p.dog}"), value: p.id)
+      }).toList()
+    });
 
     super.initState();
   }
@@ -43,8 +52,6 @@ class _ProtocolPageState extends State<ProtocolPage> {
 
   @override
   Widget build(BuildContext context) {
-    Moment moment = ModalRoute.of(context).settings.arguments;
-
     return Scaffold(
       appBar: AppBar(
         title: MomentAppBarTitle(moment: moment),
@@ -92,6 +99,12 @@ class _ProtocolPageState extends State<ProtocolPage> {
     return DropdownButtonFormField<int>(
           items: _participants,
           value: _selectedParticipant,
+          validator: (value) {
+            if (value == null) {
+              return 'Du måste välja en deltagare';
+            }
+            return null;
+          },
           onChanged: (value) {
             setState(() {
               _selectedParticipant = value;

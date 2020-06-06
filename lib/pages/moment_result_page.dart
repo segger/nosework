@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:nosework/models/app_models.dart';
 import 'package:nosework/pages/protocol_page.dart';
 import 'package:nosework/services/result_service.dart';
-import 'package:nosework/widgets/moment_app_bar.dart';
+import 'package:nosework/widgets/moment_app_bar_title.dart';
 import 'package:nosework/widgets/moment_result_table.dart';
 import 'package:nosework/widgets/nw_drawer.dart';
 
@@ -15,10 +15,21 @@ class MomentResultPage extends StatefulWidget {
 }
 
 class _MomentResultPageState extends State<MomentResultPage> {
+
+  _add(BuildContext context, Moment moment) {
+    Navigator.push(context,
+      MaterialPageRoute(
+        builder: (context) => ProtocolPage(
+          moment: moment,
+        )
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     Moment moment = ModalRoute.of(context).settings.arguments;
-    
+
     return Scaffold(
       appBar: AppBar(
         title: MomentAppBarTitle(moment: moment),
@@ -37,7 +48,7 @@ class _MomentResultPageState extends State<MomentResultPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, ProtocolPage.routeName, arguments: moment);
+          _add(context, moment);
         },
         child: Icon(Icons.add),
       ),
