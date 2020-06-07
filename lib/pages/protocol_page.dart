@@ -51,7 +51,6 @@ class _ProtocolPageState extends State<ProtocolPage> {
   }
 
   void _save() {
-    print('save protocol');
     _formKey.currentState.save();
 
     protocol.participantId = _selectedParticipant;
