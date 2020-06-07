@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:nosework/pages/participant_page.dart';
+import 'package:nosework/pages/results/result_page.dart';
 import 'package:nosework/pages/tournament_page.dart';
 
 class NWDrawer extends StatelessWidget{
@@ -34,6 +35,13 @@ class NWDrawer extends StatelessWidget{
             title: Text('Deltagare'),
             onTap: () {
               Navigator.pushNamed(context, ParticipantPage.routeName);
+            }
+          ),
+          ListTile(
+            leading: Icon(Icons.flag),
+            title: Text('Resultat'),
+            onTap: () {
+              Navigator.pushNamed(context, ResultPage.routeName);
             }
           ),
         ],

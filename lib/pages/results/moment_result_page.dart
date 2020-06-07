@@ -8,7 +8,7 @@ import 'package:nosework/widgets/moment_result_table.dart';
 import 'package:nosework/widgets/nw_drawer.dart';
 
 class MomentResultPage extends StatefulWidget {
-  static const routeName = '/contestresults';
+  static const routeName = '/results-moment';
   MomentResultPage({Key key}) : super(key: key);
   @override
   _MomentResultPageState createState() => _MomentResultPageState();
