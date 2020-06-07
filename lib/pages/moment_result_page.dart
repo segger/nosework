@@ -21,6 +21,8 @@ class _MomentResultPageState extends State<MomentResultPage> {
       MaterialPageRoute(
         builder: (context) => ProtocolPage(
           moment: moment,
+          protocol: Protocol(),
+          onSaved: () => setState(() {}),
         )
       ),
     );

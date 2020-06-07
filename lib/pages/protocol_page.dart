@@ -9,7 +9,9 @@ import 'package:nosework/widgets/search_area_expansion.dart';
 
 class ProtocolPage extends StatefulWidget {
   final Moment moment;
-  ProtocolPage({Key key, this.moment }) : super(key: key);
+  final Protocol protocol;
+  final Function onSaved;
+  ProtocolPage({Key key, this.moment, this.protocol, this.onSaved }) : super(key: key);
 
   @override
   _ProtocolPageState createState() => _ProtocolPageState();
@@ -19,6 +21,7 @@ class _ProtocolPageState extends State<ProtocolPage> {
   final _formKey = GlobalKey<FormState>();
 
   Moment moment;
+  Protocol protocol;
 
   List<DropdownMenuItem<int>> _participants = [];
   int _selectedParticipant;
@@ -33,6 +36,9 @@ class _ProtocolPageState extends State<ProtocolPage> {
   @override
   void initState() {
     moment = widget.moment;
+    protocol = widget.protocol;
+    protocol.momentId = moment.id;
+
     _totTime = moment.maxTime;
 
     DBRepository().getParticipants().then((participants) => {
@@ -47,7 +53,18 @@ class _ProtocolPageState extends State<ProtocolPage> {
   void _save() {
     print('save protocol');
     _formKey.currentState.save();
-    // DBRepository().saveProtocol();
+
+    protocol.participantId = _selectedParticipant;
+    protocol.sse = _sseValue;
+    protocol.points = _totPoints;
+    protocol.errors = _totErrors;
+    protocol.time = _totTime;
+    protocol.comment = _commentValue;
+
+    DBRepository().saveProtocol(protocol);
+    if (widget.onSaved != null) {
+      widget.onSaved();
+    }
     Navigator.pop(context);
   }
 

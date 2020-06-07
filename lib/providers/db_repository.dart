@@ -48,4 +48,12 @@ class DBRepository {
       return Protocol.of(dbList[i]);
     });
   }
+
+  Future<int> saveProtocol(Protocol protocol) async {
+    if (protocol.id == null) {
+      return await provider.insert(DBConstants.PROTOCOL_TABLE, protocol.toDbMap());
+    } else {
+      return await provider.update(DBConstants.PROTOCOL_TABLE, protocol.toDbMap());
+    }
+  }
 }
