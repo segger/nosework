@@ -24,15 +24,16 @@ class _ProtocolPageState extends State<ProtocolPage> {
   int _selectedParticipant;
   bool _sseValue = false;
 
-  int _totPoints = 25;
+  int _totPoints = 0;
   int _totErrors = 0;
-  int _totTime = 37130;
+  int _totTime = 0;
 
   String _commentValue;
 
   @override
   void initState() {
     moment = widget.moment;
+    _totTime = moment.maxTime;
 
     DBRepository().getParticipants().then((participants) => {
       _participants = participants.expand((p) => {
@@ -130,12 +131,23 @@ class _ProtocolPageState extends State<ProtocolPage> {
     );
   }
 
+  void _onChange(SearchAreaDto dto) {
+    setState(() {
+      _totPoints = dto.found ? 25 : 0;
+      _totErrors = dto.errors;
+      _totTime = (dto.time != null) ? dto.time : 0;
+    });
+  }
+
   Widget _hides() {
     return ListView.builder(
           shrinkWrap: true,
           itemCount: 1,
           itemBuilder: (BuildContext context, int index) {
-            return SearchAreaExpansion();
+            return SearchAreaExpansion(
+              moment: moment,
+              onChange: _onChange
+            );
           },
     );
   }

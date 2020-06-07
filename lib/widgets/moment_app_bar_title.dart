@@ -19,7 +19,7 @@ class MomentAppBarTitle extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text("${moment.name}", style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.bold),),
-                Text("${moment.printType()}"),
+                Text("${Utils.momentType(moment.type)}"),
               ],
             ),
           ),

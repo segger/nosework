@@ -26,4 +26,14 @@ class Utils {
       return null;
     }
   }
+
+  static String momentType(String type) {
+    switch(type) {
+      case 'INDOOR': return 'Inomhussök';
+      case 'OUTDOOR': return 'Utomhussök';
+      case 'VEHICLE': return 'Fordonssök';
+      case 'CONTAINER': return 'Behållarsök';
+    }
+    return '';
+  }
 }

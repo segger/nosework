@@ -36,16 +36,6 @@ class Moment {
 
   Moment({ this.id, this.name, this.type, this.maxTime });
 
-  String printType() {
-    switch(type) {
-      case 'INDOOR': return 'Inomhussök';
-      case 'OUTDOOR': return 'Utomhussök';
-      case 'VEHICLE': return 'Fordonssök';
-      case 'CONTAINER': return 'Behållarsök';
-    }
-    return '';
-  }
-
   static Moment of(Map<String, dynamic> dbMap) {
     return Moment(
       id: dbMap['id'],
@@ -114,4 +104,12 @@ class Result {
     points = protocol.points,
     errors = protocol.errors,
     time = Utils.toMinSecMillis(protocol.time);
+}
+
+class SearchAreaDto {
+  bool found;
+  int errors;
+  int time;
+
+  SearchAreaDto() : found = false, errors = 0, time = 0;
 }

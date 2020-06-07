@@ -29,7 +29,7 @@ class MomentCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text("${moment.name}", style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),),
-                    Text("${moment.printType()}"),
+                    Text("${Utils.momentType(moment.type)}"),
                   ],
                 ),
               ),
